@@ -7,7 +7,7 @@ export default function Navbar({ title, right }) {
     <NavBar
       right={right}
       onBack={() => {
-        history.toString(-1)
+        history(-1)
       }}
     >
       {title}
