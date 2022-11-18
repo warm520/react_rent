@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import App from './App';
+import './index.css'
+import Routers from './Router'
+import './utils/city'
+// 导入字体
+import './asserts/font/iconfont.css'
 
-
-ReactDOM.render(<App/>,document.getElementById('root'))
+ReactDOM.render(<Routers/>,document.getElementById('root'))
