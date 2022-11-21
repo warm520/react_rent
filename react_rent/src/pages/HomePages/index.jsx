@@ -18,7 +18,6 @@ const Bottom = ()=>{
   const navigate = useNavigate();
   const location = useLocation();
   const {pathname} = location;
-  console.log(pathname)
   const tabs = [
     {
       key:'/home',
@@ -42,7 +41,6 @@ const Bottom = ()=>{
     }
   ]
   const setActiveKey = (value)=>{
-    console.log(value);
     navigate(value)
   }
   return(

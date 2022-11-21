@@ -1,0 +1,220 @@
+.houseDetail {
+  // background-color: #f6f5f6;
+  overflow-y: auto;
+  :global .icon-share {
+    font-size: 18px;
+  }
+  .houseDetailBavBar{
+    position:fixed;
+    z-index:999;
+    width:100%;
+
+  }
+  .swiperDetails {
+    height: 250px;
+    background-color: #fff;
+  }
+  .info{
+    margin-top: 10px;
+    .infoFirst{
+      background-color: #fff;
+      padding:10px;
+      margin-bottom:10px;
+      .infoTag{
+        margin-top:10px;
+        margin-right:5px;
+        span{
+          display:inline-block;
+          border-radius: 3px;
+          background-color: #e1f5f8;
+          color:#39becd;
+          font-size: 12px;
+        }
+      }
+      .infoPrice{
+        border-top:1px solid #eee;
+        border-bottom:1px solid #eee;
+        margin:10px 0;
+        padding: 10px 20px;
+        .infoPriceItem{
+          padding:10px;
+          color:#fa5741;
+          font-weight: bold;
+          font-size:16px;
+          margin:0 auto;
+          .priceMonth{
+            font-size:12px;
+          }
+          div{
+            &:nth-child(2){
+              // color:red
+              color:#999;
+              font-size:12px;
+              text-align: center;
+              margin-top:5px;
+            }
+          }
+        }
+      }
+      .infoSimple{
+        .infoSimpleItem{
+          
+          div{
+            color:#999;
+            margin-bottom:10px;
+            span{
+              color:black;
+            }
+          }
+        }
+      }
+      
+    }
+    
+  }
+  .houseMap{
+    // margin-top:10px;
+    // padding:10px;
+    .mapTitle{
+      background-color: #fff;
+      padding:10px;
+      font-weight: 800;
+    }
+    #map-container {
+      height: 250px;
+      z-index: 0;
+      .houseDetailBubble {
+        position: absolute;
+        padding: 0 3px;
+        height: 30px;
+        background-color: #fa5741;
+        line-height: 28px;
+        white-space: nowrap;
+        cursor: pointer;
+        .housename {
+          overflow: hidden;
+          display: inline-block;
+          padding: 0 5px;
+          width: 100%;
+          font-size: 12px;
+          vertical-align: middle;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  .housePackage{
+    margin-top:10px;
+    background-color: #fff;
+    .housePackageTitle{
+      padding:10px;
+      font-weight: 800;
+    }
+    // .housePackageList{
+    //   height: 100px;
+    // }
+  }
+  .houseIntroduce{
+    margin-top:10px;
+    background-color: #fff;
+    .houseIntroduceTitle{
+      padding:10px;
+      font-weight: 800;
+    }
+    .concat{
+      overflow: hidden;
+      position:relative;
+      border-top:1px solid #ededed;
+      padding-top:10px;
+      .userinfo{
+        margin-left:10px;
+        img{
+          float:left;
+          height: 50px;
+          margin-right:10px;
+        }
+        >div{
+          margin-bottom:10px;
+        }
+        .userAuth{
+          color:#fa5741;
+        }
+      }
+      >span{
+        position:absolute;
+        right:15px;
+        bottom:15px;
+        width: 72px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 5px;
+        color:#21b97a;
+        border:1px solid #21b97a;
+      }
+    }
+    .houseDesc{
+      line-height: 1.75;
+      margin:10px;
+    }
+  }
+  .houseLike{
+    margin-top:10px;
+    margin-bottom:50px;
+    background-color: #fff;
+    .likeTitle{
+      padding:10px;
+      font-weight: 800;
+    }
+    .houseLikeItem{
+      background-color: #fff;
+      border-top:1px solid #ededed;
+      // padding:10px;
+      padding-left:10px;
+    }
+  }
+  .buttons{
+    display:flex;
+    flex-direction: row;
+    position:fixed;
+    bottom:0;
+    background-color: #fff;
+    margin-top:60px;
+    width:100%;
+    border-top:1px solid #ededed;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    color:#999;
+    text-align:center;
+    z-index:2;
+    .favorite{
+      flex:1;
+      border-right:1px solid #ededed;
+      img{
+        width: 16px;
+        height: 16px;
+        // line-height: 16px;
+        // line-height: 48px ;
+        vertical-align: baseline;
+        margin-right:5px;
+        cursor: pointer;
+      }
+    }
+    .onLineAsk{
+      flex:1;
+      border-right:1px solid #ededed;
+      cursor: pointer;
+    }
+    .preDate{
+      flex:1;
+      background-color: #21b97a;
+      cursor: pointer;
+      a{
+        color:#fff;
+      }
+    }
+  }
+  
+}

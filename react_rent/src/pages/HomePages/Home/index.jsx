@@ -45,7 +45,6 @@ const Swipers = () => {
   const [swipersImg, setSwipersImg] = useState([])
   const [swipersLoaded, setsSwipersLoaded] = useState(false)
   useEffect(() => {
-    console.log('ik')
     const getSwiperImgs = async () => {
       const res = await axios.get('/home/swiper')
       setSwipersImg(res.data.body)
@@ -56,7 +55,7 @@ const Swipers = () => {
     return () => {
       setsSwipersLoaded(false)
     }
-  }, [])
+  }, [swipersLoaded])
   const swipers = swipersImg.map((img) => {
     return (
       <Swiper.Item key={img.id}>
@@ -149,11 +148,11 @@ const Group = ({ cityLabel }) => {
     return () => {
       setLoadGroupList(false)
     }
-  }, [])
+  }, [cityLabel])
   const gridItems = groupList.map((list) => {
     return (
       <Grid.Item key={list.id} className="groupGridItem">
-        <div className="desc">
+        <div className="groupdesc">
           <p className="title">{list.title}</p>
           <span className="info">{list.desc}</span>
         </div>
@@ -175,7 +174,7 @@ const News = ({ cityLabel }) => {
   const [newsList, setnewsList] = useState([])
   const [loadNewsList, setLoadNewsList] = useState(false)
   useEffect(() => {
-    console.log(cityLabel)
+    // console.log(cityLabel)
     const getNewsList = async () => {
       const res = await axios.get('/home/news', {
         params: {
@@ -189,13 +188,13 @@ const News = ({ cityLabel }) => {
     return()=>{
       setLoadNewsList(false)
     }
-  }, [])
+  }, [cityLabel])
   const newsGridItem = newsList.map((list) => {
     return (
       <Grid.Item key={list.id} className="newsGridItem">
         <img src={`${BASE_URL}${list.imgSrc}`} alt="" />
-        <div className="desc">
-          <h2>{list.title}</h2>
+        <div className="newsdesc">
+          <h3>{list.title}</h3>
           <span className="from">{list.from}</span>
           <span className="date">{list.date}</span>
         </div>

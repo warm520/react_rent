@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './index.css'
+import { Link } from 'react-router-dom'
+import Navbar from '../../components/NavBar'
 import { useCity } from '../../utils/city'
 import { Toast } from 'antd-mobile'
+import HouseItem from '../../components/HouseItem'
 import { axiosAPI as axios } from '../../utils'
 const BMapGL = window.BMapGL
 export default function Map() {
   // 设置小屋房源列表
   const [houseList, setHouseList] = useState([])
+  // 房屋列表是否可见
+  const [isShowHouseList, setIsShowHouseList] = useState(false)
   // 获取当前城市
   const [cityValue, cityLabel] = useCity()
   useEffect(() => {
@@ -90,53 +95,110 @@ export default function Map() {
       // 设置覆盖物样式
       label.setStyle(labelStyle)
       // 设置覆盖物点击事件
-      label.addEventListener('click',()=>{
+      label.addEventListener('click', () => {
         // 放大被点击的覆盖物
-        map.centerAndZoom(areaPoint,nextZoom)
+        map.centerAndZoom(areaPoint, nextZoom)
         // 清空原有的覆盖物
         map.clearOverlays()
         // 寻找下一级覆盖物
         renderOverLays(value)
       })
       // 添加覆盖物
-      map.addOverlay(label);
+      map.addOverlay(label)
     }
     // 覆盖渲染物 绘制小区房源信息
-    const createRect = (count, value, label, areaPoint) => {
+    const createRect = (count, value, areaName, areaPoint) => {
       //添加文本标注
+      console.log('ok')
       var opts = {
-        position:areaPoint,
-        offset:new BMapGL.Size(-35, -35)
+        position: areaPoint,
+        offset: new BMapGL.Size(-35, -35)
       }
       // 创建覆盖物实例
       var label = new BMapGL.Label('', opts)
       // 设置覆盖物内容
       label.setContent(`
         <div class='desc'>
-          
+          <p class='name'>${areaName}</p>
+          <p class='count'>${count}套</p>
         </div>
       `)
+      label.setStyle(labelStyle)
+      // 添加点击事件
+      label.addEventListener('click', async () => {
+        // 加载提示
+        Toast.show({
+          icon: 'loading',
+          content: '加载中...'
+        })
+        const result = await axios.get(`/houses?cityId=${value}`)
+        setHouseList(result.data.body.list)
+        setIsShowHouseList(true)
+
+        // 清除加载提示
+        Toast.clear()
+      })
+      map.addOverlay(label)
     }
   })
   return (
     <div className="map">
+      <Navbar
+        title={'地图找房'}
+        onBack={() => {
+          window.history.go(-1)
+        }}
+      />
       {/* 地图容器 */}
       <div id="container"></div>
+      {/* 房屋列表 */}
+      <HouseList hList={houseList} isShow={isShowHouseList} />
+    </div>
+  )
+}
+// 房屋列表
+const HouseList = ({ hList, isShow }) => {
+  // const history = useNavigate()
+  return (
+    <div className={isShow ? 'houseList' : ''}>
+      <div className="titleWrap">
+        <h1>房屋列表</h1>
+        <Link to="/home/search" className="moreHouseList">
+          更多房源
+        </Link>
+      </div>
+      <div className="houseItem">
+        {hList.map((item, index) => {
+          // console.log(item.houseCode)
+          return (
+           <Link to='/home/search'>
+             <HouseItem
+              key={item.houseCode}
+              src={item.houseImg}
+              title={item.title}
+              desc={item.desc}
+              tags={item.tags}
+              price={item.price}
+            />
+           </Link>
+          )
+        })}
+      </div>
     </div>
   )
 }
 // 地图覆盖物样式
 const labelStyle = {
-    width:'70px',
-    height:'70px',
-    cursor: 'pointer',
-    backgroundColor:'',
-    border: '0px solid rgb(255, 0, 0)',
-    padding: '0px',
-    whiteSpace: 'nowrap',
-    fontSize: '12px',
-    color: 'rgb(255, 255, 255)',
-    textAlign: 'center'
+  width: '70px',
+  height: '70px',
+  cursor: 'pointer',
+  backgroundColor: '',
+  border: '0px solid rgb(255, 0, 0)',
+  padding: '0px',
+  whiteSpace: 'nowrap',
+  fontSize: '12px',
+  color: 'rgb(255, 255, 255)',
+  textAlign: 'center'
 }
 // 设置缩放级别函数
 const getTypeAndZoom = (map) => {

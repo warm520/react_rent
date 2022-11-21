@@ -4,7 +4,7 @@ import { axiosAPI as axios } from '../../utils'
 import { getCurrentCity } from '../../utils/city'
 import { Space, IndexBar, List as AList } from 'antd-mobile'
 import { SearchOutline } from 'antd-mobile-icons'
-import { setCity,getCity } from '../../utils/city'
+import { setCity } from '../../utils/city'
 import './index.css'
 // import { get } from 'store'
 export default function CityLists() {
