@@ -1,9 +1,6 @@
-import React ,{lazy,Suspense} from "react";
+import React from "react";
 import { BrowserRouter,Routes,Route,Navigate } from "react-router-dom";
-// import { Skeleton } from "antd-mobile";
 
-// 按需加载子页面
-// const HomePages = lazy(()=>{import('./pages/HomePages')});
 // 首页
 import HomePages from "./pages/HomePages";
 import Home from "./pages/HomePages/Home";
@@ -13,6 +10,17 @@ import Search from "./pages/HomePages/Search";
 
 import CityLists from "./pages/CityList";
 import Map from "./pages/Map";
+import HouseDetails from "./pages/HouseDetails";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Favorite from "./pages/Favorite";
+
+// 房源发布模块
+import Rent from "./pages/Rent";
+import RentAdd from "./pages/Rent/ReactAdd";
+import RentSearch from "./pages/Rent/ReactSearch";
+
+
 // 注册路由
 const Routers = ()=>{
   return (
@@ -32,19 +40,17 @@ const Routers = ()=>{
           {/* 城市选择 */}
           <Route path='/citylist' element={<CityLists/>}/>
           <Route path="/map" element={<Map/>}/>
+          <Route path='/detail/:id' element={<HouseDetails/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/favorite' element={<Favorite/>}/>
+          {/* 房源发布模块 */}
+          <Route path='/rent' element={<Rent/>}/>
+          <Route path='/rent/add' element={<RentAdd/>}/>
+          <Route path='/rent/search' element={<RentSearch/>}/>
         </Routes>
       {/* </Suspense> */}
     </BrowserRouter>
   )
 }
-
-// const Loading = ()=>{
-//   return(
-//     <>
-//       <Skeleton.Title animated={true} />
-//       <Skeleton.Paragraph animated={true} />
-//     </>
-//   )
-// }
-
 export default Routers;
