@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavBar } from 'antd-mobile'
 import { useNavigate } from 'react-router-dom'
-export default function Navbar({ title, right }) {
+export default function Navbar({ title, right, color, fontColor }) {
   const history = useNavigate()
   return (
     <NavBar
@@ -9,6 +9,7 @@ export default function Navbar({ title, right }) {
       onBack={() => {
         history(-1)
       }}
+      style={{ backgroundColor: color, color: fontColor }}
     >
       {title}
     </NavBar>

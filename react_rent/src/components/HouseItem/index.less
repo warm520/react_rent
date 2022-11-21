@@ -1,0 +1,47 @@
+.house {
+  box-sizing: border-box;
+  position: relative;
+  justify-content: space-around;
+  padding-top: 10px;
+  height: 120px;
+  overflow-y: auto;
+  .houseImg {
+    float: left;
+    width: 106px;
+    height: 80px;
+    img {
+      width: 106px;
+      height: 80px;
+    }
+  }
+  .houseDetail {
+    overflow: hidden;
+    padding-left: 12px;
+    line-height: 22px;
+    .houseTitle {
+      overflow: hidden;
+      margin: 0;
+      text-overflow: ellipsis;
+      white-space: wrap;
+      vertical-align: middle;
+      font-size: 15px;
+      color: #394043;
+    }
+    .houseDesc {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: middle;
+      font-size: 12px;
+      color: #afb2b3;
+    }
+    .housePrice {
+      font-size: 12px;
+      color: #fa5741;
+      p {
+        font-size: 16px;
+        font-weight: bolder;
+      }
+    }
+  }
+}
