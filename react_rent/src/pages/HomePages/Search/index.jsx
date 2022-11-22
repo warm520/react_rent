@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCity } from '../../../utils/city'
 import SearchBars from '../../../components/SearchBar'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Toast, List as AList } from 'antd-mobile'
 import Filter from './components/Filter'
 import { axiosAPI } from '../../../utils'
@@ -44,28 +44,28 @@ export default function Search() {
       //     content: `已经找到${result.data.body.count}套房源`
       //   })
       // }
-      
     }
     getHouseList(filters, cityValue)
     // Toast.clear()
   }, [filters, cityValue])
   return (
     <>
-      {/* 头部栏 */}
-      <Header city={cityLabel} />
-      {/*  */}
-      <Filter filters={filters} setFilters={setFilters}></Filter>
-      {/* 房源列表 */}
-      <div className='houses' >
-      <HouseList
-        filters={filters}
-        houseList={houseList}
-        setHouseList={setHouseList}
-        houseCount={houseCount}
-        cityValue={cityValue}
-      />
+      <div className="searchHome">
+        {/* 头部栏 */}
+        <Header city={cityLabel} />
+        {/*  */}
+        <Filter filters={filters} setFilters={setFilters}></Filter>
+        {/* 房源列表 */}
+        <div className="houses">
+          <HouseList
+            filters={filters}
+            houseList={houseList}
+            setHouseList={setHouseList}
+            houseCount={houseCount}
+            cityValue={cityValue}
+          />
+        </div>
       </div>
-      
     </>
   )
 }
@@ -99,14 +99,14 @@ const HouseList = ({ filters, houseList, houseCount, cityValue }) => {
         return (
           <Link to={`/detail/${item.houseCode}`}>
             <HouseItem
-            key={index}
-            src={item.houseImg}
-            title={item.title}
-            desc={item.desc}
-            tags={item.tags}
-            price={item.price}
-            houseCode={item.houseCode}
-          />
+              key={index}
+              src={item.houseImg}
+              title={item.title}
+              desc={item.desc}
+              tags={item.tags}
+              price={item.price}
+              houseCode={item.houseCode}
+            />
           </Link>
         )
       })}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './index.css'
+import { Button, Toast } from 'antd-mobile'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../components/NavBar'
 import NoHouse from '../../components/NoHouse'
@@ -9,23 +10,38 @@ export default function Rent() {
   // 房源信息列表
   const [list, setList] = useState([])
   useEffect(() => {
-    // 获取房源列表的函数
-    const getRentList = async () => {
-      const result = await axios.get('/user/houses')
-      // console.log(result)
-      setList(result.data.body)
-    }
     getRentList()
   }, [list])
+  // 获取房源列表的函数
+  const getRentList = async () => {
+    const result = await axios.get('/user/houses')
+    setList(result.data.body)
+  }
+  const onDelete = async (houseCode) => {
+    const result = await axios.delete(`/user/houses/id=${houseCode}`)
+    if (result.data.status === 200) {
+      Toast.show({
+        icon: 'success',
+        content: '删除成功'
+      })
+      getRentList()
+      // const index = 
+    } else {
+      Toast.show({
+        icon:'success',
+        content:'网络有问题，删除失败'
+      })
+    }
+  }
   return (
     <div className="rent">
       <Navbar title="我的出租" color="#f5f6f5" />
-      <RentList list={list} />
+      <RentList list={list} onDelete={onDelete}/>
     </div>
   )
 }
 
-const RentList = ({ list }) => {
+const RentList = ({ list,onDelete }) => {
   const history = useNavigate()
   if (list.length === 0) {
     return (
@@ -42,7 +58,7 @@ const RentList = ({ list }) => {
           return (
             <div className="rentListItem" key={item.houseCode}>
               <div className="rentListItem">
-                <Link to={`/detail/${item.houseCode}`}>
+                {/* <Link to={`/detail/${item.houseCode}`}> */}
                   <HouseItem
                     key={item.houseCode}
                     src={item.houseImg}
@@ -51,8 +67,21 @@ const RentList = ({ list }) => {
                     tags={item.tags}
                     price={item.price}
                     houseCode={item.houseCode}
+                    button={
+                      <div>
+                        <Button
+                          size="small"
+                          onClick={() => {
+                            onDelete(item.houseCode)
+                          }}
+                        >
+                          删除
+                        </Button>
+                        <Button size="small">编辑</Button>
+                      </div>
+                    }
                   />
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
           )
@@ -63,7 +92,9 @@ const RentList = ({ list }) => {
         onClick={() => {
           history('/rent/add')
         }}
-      >发布房源</div>
+      >
+        发布房源
+      </div>
     </>
   )
 }

@@ -18,7 +18,7 @@ export default function FilterTitle({
       className="root"
       // id="filterTitle"
       style={{
-        zIndex: (openKeyType === '' || openKeyType === 'more' )? '1' : '10000'
+        zIndex: (openKeyType === '' || openKeyType === 'more' )? '1' : '10000',
       }}
     >
       <Grid columns={filterTitles.length} gap={10} className="filterTitleGrid">

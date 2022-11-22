@@ -16,6 +16,7 @@ export default function Home() {
   useEffect(() => {})
   return (
     <>
+      <div className="home">
       <div className="swipers">
         <Swipers />
         <SearchBars city={cityValue} />
@@ -35,6 +36,7 @@ export default function Home() {
           <h3>最新资讯</h3>
         </div>
         <News cityLabel={cityLabel} />
+      </div>
       </div>
     </>
   )
@@ -56,9 +58,9 @@ const Swipers = () => {
       setsSwipersLoaded(false)
     }
   }, [swipersLoaded])
-  const swipers = swipersImg.map((img) => {
+  const swipers = swipersImg.map((img,index) => {
     return (
-      <Swiper.Item key={img.id}>
+      <Swiper.Item key={index}>
         <div>
           <img
             src={`${BASE_URL}${img.imgSrc}`}

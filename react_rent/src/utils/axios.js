@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken, removeToken } from './auth';
+import { removeToken } from './auth';
 
 export const axiosAPI = axios.create({
     baseURL: 'http://localhost:8080'
@@ -14,7 +14,7 @@ axiosAPI.interceptors.request.use((config) => {
         && !url.startsWith('/user/login')
         && !url.startsWith('/user/registered')
     ) {
-        config.headers.Authorization = getToken();
+        config.headers.Authorization = sessionStorage.getItem('hkzf_token');
     }
 
     return config;
